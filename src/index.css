@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --color-space-950: #03040a;
+  --color-space-900: #070913;
+  --color-space-800: #0d1020;
+  --color-space-700: #151a31;
+  --color-nebula: #8fb3ff;
+  --color-aurora: #6ef2d0;
+  --color-solar: #ffcf6e;
+}
+
+html, body, #root { height: 100%; margin: 0; background: #03040a; color: #e6ebff; overscroll-behavior: none; }
+body { -webkit-tap-highlight-color: transparent; }
+@layer components {
+.glass { background: rgba(10, 13, 28, 0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(143, 179, 255, 0.14); }
+.scroll-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: rgba(143,179,255,.25); border-radius: 4px; }
+.badge { display:inline-flex; align-items:center; gap:.25rem; border-radius:999px; padding:.1rem .55rem; font-size:.68rem; font-weight:600; letter-spacing:.02em; }
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:.4rem; border-radius:.6rem; padding:.45rem .8rem; font-size:.82rem; font-weight:500; background:rgba(143,179,255,.10); border:1px solid rgba(143,179,255,.22); color:#dfe7ff; transition: background .15s; }
+.btn:hover { background:rgba(143,179,255,.2); }
+.btn-active { background:rgba(110,242,208,.18); border-color: rgba(110,242,208,.5); color:#bff9ea; }
+}
+canvas { touch-action: none; }
