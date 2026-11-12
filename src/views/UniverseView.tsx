@@ -12,7 +12,7 @@ export function UniverseView({ date, selection, onSelect }: { date: Date; select
     <div className="absolute inset-0">
       <UniverseScene ref={ref} date={date} selectedKey={selectionKey(selection)} showConstellations={settings.showConstellations} labels={settings.showLabels}
         onSelectDso={(o) => onSelect({ type: 'dso', obj: o })} onSelectBody={(n) => onSelect({ type: 'body', name: n })} />
-      <div className="pointer-events-none absolute left-3 top-16 md:top-3 max-w-xs md:left-4">
+      <div className="pointer-events-none absolute left-3 top-16 xl:top-3 max-w-xs md:left-4">
         <h1 className="font-display text-lg font-bold tracking-tight text-slate-100 drop-shadow">Interactive Universe</h1>
         <p className="text-[11px] leading-snug text-slate-400">Planets at their real positions for {date.toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })} (distances compressed). {settings.quality === 'high' ? '41,000' : '5,000'} catalogue stars, Milky Way along the true galactic plane, deep-sky objects at their real sky coordinates.</p>
       </div>

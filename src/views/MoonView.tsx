@@ -46,7 +46,7 @@ export function MoonView({ date, onOpenImage }: { date: Date; onOpenImage: (i: N
         onPick={(lat, lon) => { setPicked({ lat, lon }); setFeature(null); ensureLight(lat, lon) }} />
       </div>
 
-      <div className="pointer-events-none absolute left-3 top-16 md:top-3 md:left-4">
+      <div className="pointer-events-none absolute left-3 top-16 xl:top-3 md:left-4">
         <h1 className="font-display text-lg font-bold drop-shadow">Moon Observatory</h1>
         <p className="text-[11px] text-slate-400">NASA LRO LROC colour mosaic + LOLA elevation. Tap the surface to zoom in.</p>
         {note && <p className="mt-1 max-w-xs text-[11px] text-amber-200/90">{note}</p>}

@@ -75,7 +75,7 @@ export function SkyView({ selection, onSelect }: { selection: Selection | null; 
         showConstellations={settings.showConstellations} showLabels={settings.showLabels} showMessier={showMessier} showGrid={showGrid} selected={selection} onSelect={onSelect} />
       </div>
 
-      <div className="pointer-events-none absolute left-3 top-16 md:top-3 md:left-4">
+      <div className="pointer-events-none absolute left-3 top-16 xl:top-3 md:left-4">
         <h1 className="font-display text-lg font-bold drop-shadow">Live Sky from Nalhati</h1>
         <p className="text-[11px] text-slate-400">{NALHATI.lat.toFixed(2)}° N, {NALHATI.lon.toFixed(2)}° E · {fmtDateTime(date)} IST {offsetH === 0 ? '· live' : `· ${offsetH > 0 ? '+' : ''}${offsetH} h`}</p>
         <p className="text-[11px] text-aurora/90">{tw.label} — Sun {sun.alt.toFixed(1)}°</p>
