@@ -36,9 +36,14 @@ const TELESCOPES: [RegExp, string][] = [
   [/\bkitt peak\b|\bnoirlab\b/i, 'Kitt Peak / NOIRLab'],
 ]
 
-export function detectTelescope(text: string): string {
-  for (const [re, name] of TELESCOPES) if (re.test(text)) return name
-  return 'Not stated in NASA metadata'
+/** Picks the telescope named in the title, else the one mentioned earliest in the description/keywords */
+export function detectTelescope(text: string, title = ''): string {
+  const earliest = (t: string) => {
+    let best: { i: number; name: string } | null = null
+    for (const [re, name] of TELESCOPES) { const m = re.exec(t); if (m && (!best || m.index < best.i)) best = { i: m.index, name } }
+    return best?.name
+  }
+  return earliest(title) ?? earliest(text) ?? 'Not stated in NASA metadata'
 }
 
 const cache = new Map<string, Promise<NasaImage[]>>()
@@ -61,7 +66,7 @@ export function searchNasaImages(query: string, opts: { yearStart?: number; page
             const d = it.data[0]
             const thumb: string = it.links.find((l: any) => l.rel === 'preview')?.href ?? it.links[0].href
             const base = thumb.replace(/~thumb\.(jpg|png)$/i, '')
-            const text = `${d.title} ${d.description ?? ''} ${(d.keywords ?? []).join(' ')} ${d.secondary_creator ?? ''}`
+            const text = `${d.description ?? ''} ${(d.keywords ?? []).join(' ')} ${d.secondary_creator ?? ''}`
             return {
               nasaId: d.nasa_id,
               title: d.title ?? 'Untitled',
@@ -73,7 +78,7 @@ export function searchNasaImages(query: string, opts: { yearStart?: number; page
               thumb: thumb.replace(/^http:/, 'https:'),
               medium: `${base}~medium.jpg`.replace(/^http:/, 'https:'),
               original: `${base}~orig.jpg`.replace(/^http:/, 'https:'),
-              telescope: detectTelescope(text),
+              telescope: detectTelescope(text, d.title ?? ''),
               pageUrl: `https://images.nasa.gov/details/${encodeURIComponent(d.nasa_id)}`,
             }
           })
